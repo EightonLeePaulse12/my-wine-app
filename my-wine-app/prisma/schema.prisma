@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  email    String    @unique
+  password String
+  wineLogs WineLog[]
+}
+
+model Wine {
+  id       Int       @id @default(autoincrement())
+  name     String
+  year     Int
+  type     WineType
+  varietal Varietal
+  rating   Float?
+  consumed Boolean @default(false)
+  wineLogs WineLog[]
+}
+
+model WineLog {
+  id           Int       @id @default(autoincrement())
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId       Int
+  wine         Wine      @relation(fields: [wineId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  wineId       Int
+  consumed     Boolean   @default(false)
+  dateConsumed DateTime?
+}
+
+enum Varietal {
+  CabernetSauvignon
+  Merlot
+  Shiraz
+  CheninBlanc
+  SauvignonBlanc
+  Verdelho
+  Chardonnay
+  Durif
+  Pinotage
+  Semillion
+  Syrah
+  Barbera
+  Pinotnoir
+  Carmenere
+  Gewurztraminer
+  Gamay
+  Mourvedre
+  Zinfandel
+  Carignan
+  Muscat
+  Grenache
+  Tempranillo
+  Malbec
+}
+
+enum WineType {
+  RED
+  WHITE
+  ROSE
+  WHITE_BLEND
+  RED_BLEND
+}
