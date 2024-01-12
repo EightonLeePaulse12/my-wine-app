@@ -1,11 +1,16 @@
-import React from 'react'
+"use client";
+
+import React, { useEffect } from 'react'
 import '@/app/globals.css'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { setCookie, parseCookies, destroyCookie } from 'nookies';
+import { useRouter } from 'next/navigation'
+import { parseCookies } from 'nookies';
+
 
 const page = () => {
-  const route = useRouter()
+  const route = useRouter();
+  useEffect(()=>{
+    alert(route)
+  }, [])
 
   useEffect(() => {
     const storage = localStorage.getItem("info")
@@ -16,9 +21,11 @@ const page = () => {
     if (!logged && !token || logged && !token || !logged && token) {
       route.push('./login.tsx')
     }
-  }, [])
+  }, [route])
   return (
-    <></>
+    <>
+      <h1>Hello, world!</h1>
+    </>
   )
 }
 
