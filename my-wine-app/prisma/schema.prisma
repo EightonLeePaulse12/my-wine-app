@@ -26,7 +26,7 @@ model Wine {
   type     WineType
   varietal Varietal
   rating   Float?
-  consumed Boolean @default(false)
+  consumed Boolean   @default(false)
   wineLogs WineLog[]
 }
 
