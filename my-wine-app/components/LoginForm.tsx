@@ -1,9 +1,11 @@
+'use client';
+
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 
 
-const loginForm = () => {
+const LoginForm = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -26,6 +28,7 @@ const loginForm = () => {
                 setCookie({ res }, 'token', token, {
                     maxAge: 30 * 24 * 60 * 60,
                 })
+                router.push('../app/page.tsx')
             } else {
                 const err = await res.json()
                 console.log("Login failed: ", err || err.message)
@@ -55,4 +58,4 @@ const loginForm = () => {
     )
 }
 
-export default loginForm
+export default LoginForm
