@@ -19,6 +19,7 @@ export const POST = async (req: Request) => {
         email: email,
       },
     });
+    console.log("existing user: ", existingUser)
 
     if (!existingUser) {
       return NextResponse.json(
@@ -53,6 +54,8 @@ export const POST = async (req: Request) => {
         expiresIn: "1h",
       }
     );
+
+    console.log(token)
     return NextResponse.json(
       {
         user: existingUser,

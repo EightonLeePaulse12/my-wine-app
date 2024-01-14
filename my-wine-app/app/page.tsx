@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
 import '@/app/globals.css'
 import { parseCookies } from 'nookies';
 
 
 const page = () => {
-  const history = useHistory();
   
 
   useEffect(() => {
@@ -17,9 +15,9 @@ const page = () => {
     const token = cookies['token']
 
     if (!logged || !token) {
-      history.push('./login.tsx')
+      console.log("Hi")
     }
-  }, [history])
+  }, [])
   return (
     <>
       <h1>Hello, world!</h1>
