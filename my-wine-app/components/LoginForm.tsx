@@ -20,7 +20,7 @@ const LoginForm = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      console.log("RES: ", res)
+      console.log("RES: ", res && res.data)
 
       if (res) {
         const data = res.data;
