@@ -1,14 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
@@ -32,12 +29,12 @@ model Wine {
 
 model WineLog {
   id           Int       @id @default(autoincrement())
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId       Int
-  wine         Wine      @relation(fields: [wineId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   wineId       Int
   consumed     Boolean   @default(false)
   dateConsumed DateTime?
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wine         Wine      @relation(fields: [wineId], references: [id], onDelete: Cascade)
 }
 
 enum Varietal {

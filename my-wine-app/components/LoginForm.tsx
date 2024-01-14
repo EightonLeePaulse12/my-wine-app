@@ -20,12 +20,15 @@ const LoginForm = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      console.log("RES: ", res)
+
       if (res) {
-        const data = await res.json();
-        const token = data.token;
-        const user = data.user;
+        const data = res.data;
+        const token = res.data.token;
+        const user = res.data.user;
         setCookie({ res }, "token", token, {
           maxAge: 30 * 24 * 60 * 60,
+          path:"/"
         });
         console.log("I work!");
         Swal.fire({
@@ -35,8 +38,8 @@ const LoginForm = () => {
         });
         router.push("../app/page.tsx");
       } else {
-        const err = await res.json();
-        console.log("Login failed: ", err || err.message);
+        const err = "Something went wrong";
+        console.log("Login failed: ", err);
         Swal.fire({
           title: "Could not log you in",
           text: "Login was unsuccessful, something went wrong",

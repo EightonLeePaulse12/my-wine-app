@@ -19,7 +19,7 @@ export const POST = async (req: Request) => {
         email: email,
       },
     });
-    console.log("existing user: ", existingUser)
+    console.log("existing user: ", existingUser);
 
     if (!existingUser) {
       return NextResponse.json(
@@ -55,7 +55,7 @@ export const POST = async (req: Request) => {
       }
     );
 
-    console.log(token)
+    console.log(token);
     return NextResponse.json(
       {
         user: existingUser,
