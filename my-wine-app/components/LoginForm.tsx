@@ -13,22 +13,19 @@ const LoginForm = () => {
 
   const handleLog = async () => {
     try {
-      const res = await axios.post("/api/auth/[...nextauth]", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+      const res = await axios.post("/api/auth/", {
+        email,
+        password
       });
 
-      console.log("RES: ", res && res.data)
 
-      if (res) {
+      if (res.data && res.data.token) {
         const data = res.data;
         const token = res.data.token;
         const user = res.data.user;
         setCookie({ res }, "token", token, {
           maxAge: 30 * 24 * 60 * 60,
-          path:"/"
+          path: "/"
         });
         console.log("I work!");
         Swal.fire({
@@ -36,10 +33,11 @@ const LoginForm = () => {
           text: "You have logged in successfully!",
           icon: "success",
         });
-        router.push("../app/page.tsx");
+        // router.push("../app");
       } else {
         const err = "Something went wrong";
         console.log("Login failed: ", err);
+        console.log(res)
         Swal.fire({
           title: "Could not log you in",
           text: "Login was unsuccessful, something went wrong",

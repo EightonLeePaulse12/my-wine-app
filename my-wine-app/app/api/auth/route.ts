@@ -1,18 +1,23 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { compare } from "bcrypt";
-import * as z from "zod";
 import { sign } from "jsonwebtoken";
 
-const validate = z.object({
-  email: z.string().min(1, "Email is required").email("Invalid email address"),
-  password: z.string().min(1, "Password is required"),
-});
 
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { email, password } = validate.parse(body);
+    const { email, password } = body;
+
+    if(!email || !password){
+      return NextResponse.json({
+        message:"Email and password are required",
+        user: null
+      },
+      {
+        status:400
+      })
+    }
 
     const existingUser = await prisma.user.findUnique({
       where: {
