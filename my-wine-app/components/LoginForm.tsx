@@ -23,10 +23,12 @@ const LoginForm = () => {
         const data = res.data;
         const token = res.data.token;
         const user = res.data.user;
+        
         setCookie({ res }, "token", token, {
           maxAge: 30 * 24 * 60 * 60,
           path: "/"
         });
+        localStorage.setItem("data", JSON.stringify(user.id))
         console.log("I work!");
         Swal.fire({
           title: "Logged in successfully",
