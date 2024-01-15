@@ -1,35 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import WineTable from '@/components/WineTable'
-import axios from 'axios'
+import { useEffect, useState } from 'react'
+
+interface wine {
+    id: number,
+    name: string,
+    year: number,
+    type: string,
+    rating: number,
+    consumed: boolean
+}
 
 const manage = () => {
-    const [wines, setWines] = useState([])
+    const [wines, setWines] = useState<wine[]>([]);
 
     useEffect(() => {
-        const data = async () => {
-            try {
-                let id = localStorage.getItem("data")
-                if (id) {
-                    let idNumb = parseInt(id, 10)
-                    const res = await axios.get(`/api/wines/${idNumb}`)
-                    console.log("Full response: ", res)
-                    console.log(res.data)
-                    setWines(res.data.wines)
-                }
-            } catch (e) {
-                console.error("Error fetching wines: ", e)
-            }
+        const userId = localStorage.getItem("data")
+
+        if (userId) {
+            fetch(`/api/wines/${userId}`)
+                .then((res) => res.json())
+                .then((data) => setWines(data))
+                .catch((e) => console.error("Error while fetching wine: ", e))
         }
-        data()
     }, [])
 
     return (
-        <>
-            <div className="container">
-                <h1>Your Wine List</h1>
-                {wines ? <WineTable wines={wines} /> : <p>Loading...</p>}
-            </div>
-        </>
+
+        <div>
+            <h1>Winee</h1>
+            <ul>
+                {wines.map((wine) => (
+                    <li key={wine.id}>{wine.name}</li>
+                ))}
+            </ul>
+        </div>
     )
 }
 
