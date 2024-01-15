@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export const GET = async (req: NextApiRequest) => {
   try {
     console.log("REQ.QUERY = ", req.query)
-    const id = req.query.id as string;
+    const { id } = req.query;
     console.log("LOOK AT ME, LOOK AT ME: ", id);
 
     if (!id) {
@@ -15,7 +15,14 @@ export const GET = async (req: NextApiRequest) => {
       });
     }
 
-    const idAsNumb = parseInt(id, 10);
+    const idAsNumb = parseInt(id as string, 10);
+    console.log(typeof idAsNumb)
+    if(isNaN(idAsNumb)){
+      return NextResponse.json({
+        message:"Invalid ID",
+        status:400
+      })
+    }
 
     const user = await prisma.user.findUnique({
       where: {
@@ -29,6 +36,8 @@ export const GET = async (req: NextApiRequest) => {
         },
       },
     });
+
+    console.log("Prisma query result: ", user)
 
     if (!user) {
       return NextResponse.json({
@@ -46,6 +55,7 @@ export const GET = async (req: NextApiRequest) => {
     });
   } catch (e) {
     console.log("e: ", e);
+    console.log(req)
     return NextResponse.json({
       error: e && "Internal server error",
       message: "Something went wrong",
