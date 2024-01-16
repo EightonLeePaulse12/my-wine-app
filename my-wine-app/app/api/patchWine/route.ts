@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+// UPDATE WINE ENTRIES
+
 export const PATCH = async (req: Request) => {
   try {
     const { id, name, year, type, varietal, rating, consumed } =

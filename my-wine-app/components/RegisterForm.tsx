@@ -5,12 +5,15 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 
+// REGISTER USER PAGe
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
     const router = useRouter()
+
+    // API CALL FUNCTION TO HANDLE REGISTRATION
 
     const handleReg = async () => {
         try {
@@ -46,6 +49,9 @@ const RegisterForm = () => {
     }
     return (
         <>
+
+            { /* SAME THING WITH LOGGING, BINDING INPUTS TO STATE VALUES TO SEND BACK TO THE DATABASE */ }
+
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
                 <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
                     <h1 className="text-2xl font-semibold mb-6">Register</h1>

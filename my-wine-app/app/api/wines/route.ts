@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+// GET ALL THE WINE THAT BELONGS TON THE USER THAT IS LOGGED IN, ID IS PASSED IN THROUGH LOCALSTORAGE
+
 export const GET = async (req: NextApiRequest) => {
   const id = Number(req.url?.substring(req.url?.lastIndexOf("=") + 1));
   console.log(id);

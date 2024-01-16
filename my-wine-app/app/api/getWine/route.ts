@@ -3,6 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+// GET A SINGLE WINE'S DATA
+
 export const GET = async (req: NextApiRequest) => {
   const url = req.url as string;
   const id = Number(url.substring(url.lastIndexOf("=") + 1));

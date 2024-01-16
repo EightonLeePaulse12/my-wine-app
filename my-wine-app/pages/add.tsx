@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 
+// COMPONENT TO ADD A NEW WINE INTO THE DATABASE
+
 const add = () => {
     const [name, setName] = useState('')
     const [year, setYear] = useState<number>(0)

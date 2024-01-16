@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
+// FETCH A SINGLE USER ROUTE
+
 export const GET = async (req: NextApiRequest) => {
   console.log(req);
   try {

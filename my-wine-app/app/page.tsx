@@ -20,6 +20,7 @@ const page = () => {
   };
   return (
     <>
+    { /* HOME PAGE */  }
     <div className="h-screen w-full flex items-center justify-center bg-hero-section bg-cover bg-center">
         <div className="text-white text-center ">
           <h1 className="text-4xl font-extralight mb-4">Welcome to My Wine App</h1>

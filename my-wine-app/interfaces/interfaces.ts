@@ -1,4 +1,6 @@
 // interfaces.ts
+
+// INTERFACES ADDED TO SORT TYPESCRIPT ERRORS, LEARNT THIS FROM YOUTUBE AND APPLIED IT
 export interface User {
   id: number;
   username: string;

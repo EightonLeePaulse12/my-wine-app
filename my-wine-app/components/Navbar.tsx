@@ -2,6 +2,8 @@ import React from "react";
 import Link from 'next/link'
 import { parseCookies } from 'nookies'
 
+// NAVBAR - THIS WILL HAVE A FEATURE THAT CHECKS IF A USER IS LOGGED IN AND IF THE CONDITIONS ARE NOT MET, THE NAVBAR WILL CHANGE
+
 const Navbar = () => {
   const { token } = parseCookies()
   return (
@@ -9,7 +11,7 @@ const Navbar = () => {
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://i.ibb.co/v1KwgpS/Screenshot-2024-01-16-142637-removebg-preview.png" alt="Screenshot-2024-01-16-142637-removebg-preview" loading="lazy" className="h-14" alt="My Wines Logo" />
+            <img src="https://i.ibb.co/v1KwgpS/Screenshot-2024-01-16-142637-removebg-preview.png" loading="lazy" className="h-14" alt="My Wines Logo" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">My Wines</span>
           </Link>
           <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">

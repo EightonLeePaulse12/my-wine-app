@@ -1,5 +1,7 @@
 "use client";
 
+// LOGIN FORM
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -7,9 +9,12 @@ import Swal from "sweetalert2";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 
 const LoginForm = () => {
+  // DEFINING ALL THE STATES FOR INPUT ENTRIES 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  // MAKING API CALL
 
   const handleLog = async () => {
     try {
@@ -18,9 +23,8 @@ const LoginForm = () => {
         password
       });
 
-
+      // ADDING CONDITIONALS TO MAKE SURE THE USER LOGS IN PROPERLY
       if (res.data && res.data.token) {
-        const data = res.data;
         const token = res.data.token;
         const user = res.data.user;
         
@@ -52,6 +56,9 @@ const LoginForm = () => {
   };
   return (
     <>
+
+      { /* PAGE DESIGN AND BINDING INPUTS TO STATES SO THAT IT CAN BE SENT BACK AS VALUES TO THE API */ }
+
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
           <h1 className="text-2xl font-semibold mb-6">Login</h1>

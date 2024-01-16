@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
+// API route for logging the user in
 
 export const POST = async (req: Request) => {
   try {
@@ -18,7 +19,7 @@ export const POST = async (req: Request) => {
         status:400
       })
     }
-
+    // Finding out to see if the user is in the database
     const existingUser = await prisma.user.findUnique({
       where: {
         email: email,
@@ -26,6 +27,7 @@ export const POST = async (req: Request) => {
     });
     console.log("existing user: ", existingUser);
 
+    // Sending a 404 NOT FOUND if the user does not exist
     if (!existingUser) {
       return NextResponse.json(
         {
@@ -37,9 +39,9 @@ export const POST = async (req: Request) => {
         }
       );
     }
-
+    // Comparing the user's entered password with the encrypted one
     const validatePass = await compare(password, existingUser.password);
-
+    // If passwords don't match, I send a 401
     if (!validatePass) {
       return NextResponse.json(
         {
@@ -51,7 +53,7 @@ export const POST = async (req: Request) => {
         }
       );
     }
-
+    // Create a token to store inside the cookie on the frontend to check if the user is still logged in -- COOKIE EXPIRES IN 1H --
     const token = sign(
       { userId: existingUser.id, email: existingUser.email },
       process.env.SECRET_KEY || "Secret key timed out ig",
@@ -61,7 +63,7 @@ export const POST = async (req: Request) => {
     );
 
     console.log(token);
-    
+    // Sending user's data for data management system as well as a message and of course, the token
     return NextResponse.json(
       {
         user: existingUser,

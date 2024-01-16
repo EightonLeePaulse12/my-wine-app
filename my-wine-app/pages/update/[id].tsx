@@ -1,4 +1,4 @@
-// pages/update/[id].tsx
+// PAGE FOR UPDATING WINE QUERIES IN CASE USERS HAVE CONSUMED IT OR WANT TO CHANGE SOMETHING ON IT
 'use client';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -18,6 +18,8 @@ const UpdateWine: React.FC<UpdateWineProps> = ({ wineId }) => {
     const [type, setType] = useState("");
     const [varietal, setVarietal] = useState("CabernetSauvignon");
     const [rating, setRating] = useState(0);
+
+    // API CALL TO FETCH THE DETAILS OF THE WINE THE USER WANTS TO EDIT
 
     useEffect(() => {
         const fetchWineDetails = async () => {
@@ -41,6 +43,8 @@ const UpdateWine: React.FC<UpdateWineProps> = ({ wineId }) => {
 
         fetchWineDetails();
     }, [wineId, router]);
+
+    // FUNCTION TO HANDLE API CALL TO EDIT QUERIES
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

@@ -1,3 +1,5 @@
+// MAIN PAGE - THIS IS WHERE USERS MANAGE THEIR WINES, THEY CAN ADD, UPDATE AND DELETE FROM THIS PAGE
+
 'use client';
 import '@/app/globals.css'
 import Navbar from '@/components/Navbar'
@@ -13,6 +15,7 @@ const manage = () => {
     const [perPage, setPerPage] = useState(20)
     const [current, setCurrent] = useState(1)
 
+    // API CALL FOR DELETE BUTTON
     const handleDel = async (wineId) => {
         const res = await Swal.fire({
             title: 'Are you sure?',
@@ -53,7 +56,7 @@ const manage = () => {
             });
         }
     }
-
+    // API CALL TO ADD THE REST OF THE QUERIES IN
     const handleSkip = ()=>{
         setCurrent((prevPage) => prevPage + 1)
     }
@@ -61,7 +64,7 @@ const manage = () => {
     
 
     const [wines, setWines] = useState([])
-
+    // VARIABLE TO DECLARE ONLY 20 SETS OF WINE FOR SHOW MORE BUTTON
     const displayWine = wines?.slice(0, perPage * current)
     console.log(displayWine)
     useEffect(() => {
@@ -72,7 +75,7 @@ const manage = () => {
     }, [])
     useEffect(() => {
         const id = localStorage.getItem("data")
-
+        // GET ALL THE WINES THAT BELONGS TO A SPECIFIC USER
         const handleCall = async () => {
             try {
                 const res = await axios.get(`/api/wines?id=${id}`)
@@ -94,7 +97,7 @@ const manage = () => {
         }, 2000)
     }, [wines])
 
-
+    // MAIN TABLE WHERE ALL THE MAGIC HAPPENS (CRUD SYSTEM)
     return (
         <>
         {/* <Navbar/> */}

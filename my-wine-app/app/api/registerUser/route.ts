@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { hash } from "bcrypt";
 
+// PASSWORD HASHING AND CREATE QUERY TO REGISTER A USER INTO THE DATABASE, THIS PUSHES THEM TO THE LOGIN PAGE FOR THEM TO LOG IN AFTER REGISTRATION
+
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();

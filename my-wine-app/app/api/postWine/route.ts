@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+// CREATE NEW WINE, THIS WILL UPDATE AND HAVE A CONNECTION TO THE USER'S FOREIGN KEY
+
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();

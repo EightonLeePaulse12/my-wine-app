@@ -1,3 +1,5 @@
+// INITIALIZING AND CONNECTING THE HOSTED PRISMA DATABASE TO THE PROJECT
+
 import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {

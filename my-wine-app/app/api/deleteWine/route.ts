@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+// API ROUTE FOR DELETING A SPECIFIC WINE
+
 export const DELETE = async (req: Request) => {
   try {
     const { id } = await req.json();
@@ -12,7 +14,7 @@ export const DELETE = async (req: Request) => {
         status: 404,
       });
     }
-
+    // PASS IN THE ID OF THE WINE THAT IS BEING DELETED SO THAT ONLY THE NECESSARY ONE GETS DELETED
     const delWine = await prisma.wine.delete({
       where: {
         id: parseInt(id, 10),

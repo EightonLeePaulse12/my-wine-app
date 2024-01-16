@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 
+// FOOTER - ALL LINKS WILL BE DEAD LINKS
+
 const Footer = () => {
   return (
     <>
