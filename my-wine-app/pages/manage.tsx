@@ -10,13 +10,28 @@ import Link from 'next/link'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 
+
+interface Wine {
+    id: number;
+    wine: {
+      id: number;
+      name: string;
+      year: number;
+      type: string;
+      varietal: string;
+      rating: number;
+      consumed: boolean;
+    };
+    dateConsumed: string;
+  }
+  
 const manage = () => {
     const router = useRouter()
     const [perPage, setPerPage] = useState(20)
     const [current, setCurrent] = useState(1)
 
     // API CALL FOR DELETE BUTTON
-    const handleDel = async (wineId) => {
+    const handleDel = async (wineId: number) => {
         const res = await Swal.fire({
             title: 'Are you sure?',
             text: 'You will not be able to recover this data!',
@@ -63,7 +78,7 @@ const manage = () => {
 
     
 
-    const [wines, setWines] = useState([])
+    const [wines, setWines] = useState<Wine[]>([])
     // VARIABLE TO DECLARE ONLY 20 SETS OF WINE FOR SHOW MORE BUTTON
     const displayWine = wines?.slice(0, perPage * current)
     console.log(displayWine)
