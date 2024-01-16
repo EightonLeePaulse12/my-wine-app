@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { name, year, type, varietal, rating } = body;
+    const { id, name, year, type, varietal, rating } = body;
 
-    if (!name && !year && !type && !varietal && rating === undefined) {
+    if (!id && !name && !year && !type && !varietal && rating === null) {
       return NextResponse.json({
         message: "Not all entries were retrieved",
         status: 400,
@@ -20,8 +20,16 @@ export const POST = async (req: Request) => {
         type,
         varietal,
         rating,
+        wineLogs:{
+          create:{
+            userId: parseInt(id, 10),
+            consumed: false
+          }
+        }
       },
     });
+
+    
 
     return NextResponse.json({
       message: "Successfully added the wine to the database",
@@ -38,13 +46,3 @@ export const POST = async (req: Request) => {
   }
 };
 
-// model Wine {
-//     id       Int       @id @default(autoincrement())
-//     name     String
-//     year     Int
-//     type     WineType
-//     varietal Varietal
-//     rating   Float?
-//     consumed Boolean @default(false)
-//     wineLogs WineLog[]
-//   }

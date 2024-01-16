@@ -1,58 +1,70 @@
+// pages/update/[id].tsx
+'use client';
 import { useState, useEffect } from "react";
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import { useRouter } from "next/router";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-interface updateWineProps {
-    wineId: number
+interface UpdateWineProps {
+    wineId: number;
 }
 
-const UpdateWine: React.FC<updateWineProps> = ({ wineId }) => {
-    const [name, setName] = useState('');
+const UpdateWine: React.FC<UpdateWineProps> = ({ wineId }) => {
+    const router = useRouter();
+    const { id } = router.query
+
+    const [name, setName] = useState("");
     const [year, setYear] = useState(0);
-    const [type, setType] = useState('');
-    const [varietal, setVarietal] = useState('CabernetSauvignon');
+    const [type, setType] = useState("");
+    const [varietal, setVarietal] = useState("CabernetSauvignon");
     const [rating, setRating] = useState(0);
 
     useEffect(() => {
         const fetchWineDetails = async () => {
             try {
-                const response = await axios.get(`/api/getWine/${wineId}`);
-                const wineDetails = response.data.wine;
-                setName(wineDetails.name);
-                setYear(wineDetails.year);
-                setType(wineDetails.type);
-                setVarietal(wineDetails.varietal);
-                setRating(wineDetails.rating || 0);
+                console.log(id)
+                if (id) {
+                    const response = await axios.get(`/api/getWine?id=${id}`);
+                    console.log(response)
+                    const wineDetails = response.data.wine;
+                    setName(wineDetails.name);
+                    setYear(wineDetails.year);
+                    setType(wineDetails.type);
+                    setVarietal(wineDetails.varietal);
+                    setRating(wineDetails.rating || 0);
+                }
             } catch (error) {
                 console.error("Error fetching wine details:", error);
+                router.push("/manage");
             }
         };
 
         fetchWineDetails();
-    }, [wineId]);
+    }, [wineId, router]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const update = await axios.put(`/api/updateWine/${wineId}`, {
+            const update = await axios.patch(`/api/patchWine`, {
+                id: id,
                 name,
                 year,
                 type,
                 varietal,
-                rating
+                rating,
             });
 
-            if (update.data.message === "Successfully updated the wine in the database") {
+            if (update.data.message === "Successfully updated wine") {
                 Swal.fire({
                     title: "Updated successfully",
                     text: "You have successfully updated your wine",
-                    icon: "success"
+                    icon: "success",
                 });
             } else {
                 Swal.fire({
                     title: "Something went wrong",
                     text: "Something went wrong while updating your wine",
-                    icon: "error"
+                    icon: "error",
                 });
             }
         } catch (error) {
@@ -60,7 +72,7 @@ const UpdateWine: React.FC<updateWineProps> = ({ wineId }) => {
             Swal.fire({
                 title: "Something went wrong",
                 text: "Something is not right",
-                icon: "error"
+                icon: "error",
             });
         }
     };
@@ -139,3 +151,4 @@ const UpdateWine: React.FC<updateWineProps> = ({ wineId }) => {
 };
 
 export default UpdateWine;
+

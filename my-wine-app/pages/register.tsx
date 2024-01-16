@@ -1,4 +1,6 @@
 import React from 'react'
+import '@/app/globals.css'
+
 import RegisterForm from '@/components/RegisterForm'
 
 const register = () => {

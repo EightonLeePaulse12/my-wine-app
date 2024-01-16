@@ -1,5 +1,7 @@
+import '@/app/globals.css'
 import { useState } from "react";
 import axios from 'axios'
+import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 
 const add = () => {
@@ -8,17 +10,22 @@ const add = () => {
     const [type, setType] = useState('')
     const [varietal, setVarietal] = useState<string>('CabernetSauvignon')
     const [rating, setRating] = useState<number>(0)
+    const router = useRouter()
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleSubmit = async () => {
+
+        const userId = Number(localStorage.getItem("data"))
         try {
-            const add = await axios.post('/api/postWine/', {
+            const add = await axios.post('/api/postWine', {
+                userId: userId,
                 name,
                 year,
                 type,
                 varietal,
                 rating
             })
+            console.log("HERE, YOU'RE LOOKING FOR ME: ", userId)
+            console.log(typeof userId)
             console.log(add.data)
             if (add.data.message === "Successfully added the wine to the database") {
                 Swal.fire({
@@ -26,6 +33,9 @@ const add = () => {
                     text: "You have successfully added your wine",
                     icon: "success"
                 })
+                // setTimeout(() => {
+                //     router.push('/manage')
+                // }, 1000)
             } else {
                 Swal.fire({
                     title: "Something went wrong",
@@ -114,7 +124,7 @@ const add = () => {
                     onChange={(e) => setRating(Number(e.target.value))}
                 />
                 <br />
-                <button type="submit">Add Wine</button>
+                <button type="button" onClick={handleSubmit}>Add Wine</button>
             </form>
         </div>
     )
