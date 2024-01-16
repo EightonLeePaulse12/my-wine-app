@@ -13,10 +13,18 @@ const page = () => {
       router.push('/login')
     }
   }, [])
+  const containerStyle = {
+    backgroundImage: 'url("/public/assets/terry-vlisidis-0dhIwRsPV74-unsplash.jpg")',
+    backgroundSize: 'cover', // Adjust as needed
+    backgroundPosition: 'center', // Adjust as needed
+  };
   return (
     <>
-    <div className="container h-screen">
-      <h1 className="font-extralight text-cyan-800 text-xl"></h1>
+    <div className="h-screen w-full flex items-center justify-center bg-hero-section bg-cover bg-center">
+        <div className="text-white text-center ">
+          <h1 className="text-4xl font-extralight mb-4">Welcome to My Wine App</h1>
+          <p className="text-lg font-light">Explore and manage your wine collection with ease.</p>
+        </div>
       </div>
     </>
   )

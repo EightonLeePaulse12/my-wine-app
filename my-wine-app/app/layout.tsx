@@ -13,10 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Navbar />
-      <body className="yes">{children}</body>
+    <div>
+      <body className="yes">
+        <Navbar />
+        {children}
+      </body>
       <Footer />
-    </>
+    </div>
   );
 }

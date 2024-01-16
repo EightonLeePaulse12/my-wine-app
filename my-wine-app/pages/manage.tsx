@@ -1,12 +1,17 @@
 'use client';
 import '@/app/globals.css'
+import Navbar from '@/components/Navbar'
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import Swal from 'sweetalert2'
+import { useRouter } from 'next/router'
 
 const manage = () => {
+    const router = useRouter()
+    const [perPage, setPerPage] = useState(20)
+    const [current, setCurrent] = useState(1)
 
     const handleDel = async (wineId) => {
         const res = await Swal.fire({
@@ -49,7 +54,22 @@ const manage = () => {
         }
     }
 
+    const handleSkip = ()=>{
+        setCurrent((prevPage) => prevPage + 1)
+    }
+
+    
+
     const [wines, setWines] = useState([])
+
+    const displayWine = wines?.slice(0, perPage * current)
+    console.log(displayWine)
+    useEffect(() => {
+        const id = localStorage.getItem("data")
+        if (!id) {
+            router.push('/login')
+        }
+    }, [])
     useEffect(() => {
         const id = localStorage.getItem("data")
 
@@ -77,17 +97,18 @@ const manage = () => {
 
     return (
         <>
+        {/* <Navbar/> */}
             <div className="container"></div>
             <h1>Hello World!</h1>
             <div className="add-button">
-                        <Link href="/add">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Add Wine
-                            </button>
-                        </Link>
-                    </div>
+                <Link href="/add">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Add Wine
+                    </button>
+                </Link>
+            </div>
 
-            {wines.length === 0 ? (
+            {displayWine.length === 0 ? (
 
                 <div role="status" className="h-screen flex justify-center items-center">
                     <svg aria-hidden="true" className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +120,7 @@ const manage = () => {
 
             ) : (
                 <>
-                    
+
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -134,17 +155,11 @@ const manage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {wines.map((wine) => (
+                                {displayWine.map((wine) => (
                                     <tr
                                         key={wine.id}
                                         className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                                     >
-                                        {/* <th
-                                        scope="row"
-                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        
-                                    </th> */}
                                         <td className="px-6 py-4">{wine.wine.id}</td>
                                         <td className="px-6 py-4">{wine.wine.name}</td>
                                         <td className="px-6 py-4">{wine.wine.year}</td>
@@ -169,6 +184,11 @@ const manage = () => {
                             </tbody>
                         </table>
                     </div>
+                    {wines.length > perPage * current && (
+                        <button onClick={handleSkip} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Show More 
+                        </button>
+                    )}
                 </>
             )}
         </>

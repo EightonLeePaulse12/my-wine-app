@@ -35,7 +35,7 @@ const LoginForm = () => {
           text: "You have logged in successfully!",
           icon: "success",
         });
-        // router.push("../app");
+        router.push("/");
       } else {
         const err = "Something went wrong";
         console.log("Login failed: ", err);
@@ -52,20 +52,30 @@ const LoginForm = () => {
   };
   return (
     <>
-      <div className="container">
-        <input
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={handleLog}>Login</button>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
+          <h1 className="text-2xl font-semibold mb-6">Login</h1>
+          <input
+            type="text"
+            placeholder="Email"
+            className="w-full border p-2 mb-4 rounded"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full border p-2 mb-6 rounded"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            onClick={handleLog}
+            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          >
+            Login
+          </button>
+        </div>
       </div>
     </>
   );

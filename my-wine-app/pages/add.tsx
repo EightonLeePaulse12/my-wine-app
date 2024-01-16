@@ -17,7 +17,7 @@ const add = () => {
         const userId = Number(localStorage.getItem("data"))
         try {
             const add = await axios.post('/api/postWine', {
-                userId: userId,
+                userId,
                 name,
                 year,
                 type,

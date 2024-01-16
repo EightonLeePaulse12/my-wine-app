@@ -46,24 +46,37 @@ const RegisterForm = () => {
     }
     return (
         <>
-            <div className="container">
-                <input type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)} />
-                <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button onClick={handleReg}>Register</button>
+            <div className="flex items-center justify-center min-h-screen bg-gray-100">
+                <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
+                    <h1 className="text-2xl font-semibold mb-6">Register</h1>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        className="w-full border p-2 mb-4 rounded"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        className="w-full border p-2 mb-4 rounded"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        className="w-full border p-2 mb-6 rounded"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button
+                        onClick={handleReg}
+                        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+                    >
+                        Register
+                    </button>
+                </div>
             </div>
         </>
     )
