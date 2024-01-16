@@ -61,6 +61,7 @@ export const POST = async (req: Request) => {
     );
 
     console.log(token);
+    
     return NextResponse.json(
       {
         user: existingUser,

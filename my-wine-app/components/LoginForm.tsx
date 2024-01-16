@@ -28,7 +28,7 @@ const LoginForm = () => {
           maxAge: 30 * 24 * 60 * 60,
           path: "/"
         });
-        localStorage.setItem("data", JSON.stringify(user.id))
+        localStorage.setItem("data", JSON.stringify(user.id, user.username, user.email))
         console.log("I work!");
         Swal.fire({
           title: "Logged in successfully",
