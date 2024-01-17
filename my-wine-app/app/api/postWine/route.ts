@@ -36,7 +36,6 @@ export const POST = async (req: Request) => {
         rating,
         wineLogs: {
           create: {
-            user: Number(id),
             consumed: false,
             user: { connect: { id: user.id } },
           },
