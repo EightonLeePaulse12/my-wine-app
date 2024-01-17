@@ -33,9 +33,6 @@ const add = () => {
                 varietal,
                 rating
             })
-            console.log("HERE, YOU'RE LOOKING FOR ME: ", userId)
-            console.log(typeof userId)
-            console.log(add.data)
             if (add.data.message === "Successfully added the wine to the database") {
                 Swal.fire({
                     title: "Added successfully",
@@ -53,7 +50,6 @@ const add = () => {
                 })
             }
         } catch (e) {
-            console.log(e)
             Swal.fire({
                 title: "Something went wrong",
                 text: "Something is not right",

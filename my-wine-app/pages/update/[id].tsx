@@ -35,10 +35,8 @@ const UpdateWine: React.FC<UpdateWineProps> = ({ wineId }) => {
     useEffect(() => {
         const fetchWineDetails = async () => {
             try {
-                console.log(id)
                 if (id) {
                     const res = await axios.get(`/api/getWine?id=${id}`);
-                    console.log(res)
                     const wineDetails = res.data.wine;
                     setName(wineDetails.name);
                     setYear(wineDetails.year);

@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 export const DELETE = async (req: Request) => {
   try {
     const { id } = await req.json();
-    console.log(id)
 
     if (!id) {
       return NextResponse.json({
@@ -34,7 +33,6 @@ export const DELETE = async (req: Request) => {
       wine: delWine,
     });
   } catch (e) {
-    console.log(e);
     return NextResponse.json({
       message: "An error occured",
       status: 500,

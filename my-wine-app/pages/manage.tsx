@@ -14,7 +14,8 @@ import axios from 'axios'
 import Link from 'next/link'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
-import { noSSR } from 'next/dynamic';
+import Cookies from 'js-cookie';
+
 
 
 interface Wine {
@@ -36,6 +37,13 @@ const manage = () => {
     const [perPage, setPerPage] = useState(20)
     const [current, setCurrent] = useState(1)
 
+    useEffect(()=>{
+        const token = Cookies.get("token")
+        if(!token){
+          router.push('/')
+        }
+      }, [router])
+
     // API CALL FOR DELETE BUTTON
     const handleDel = async (wineId: number) => {
         const res = await Swal.fire({
@@ -53,7 +61,6 @@ const manage = () => {
                 const resp = await axios.delete(`/api/deleteWine`, {
                     data: { id: wineId }
                 })
-                console.log(resp)
                 Swal.fire({
                     title: 'Deleted!',
                     text: 'Your data has been deleted.',
@@ -62,7 +69,6 @@ const manage = () => {
 
                 setWines((prevWine) => prevWine.filter((wine) => wine.id !== wineId))
             } catch (error) {
-                console.log(error)
                 Swal.fire({
                     title: 'Error!',
                     text: 'An error occurred while deleting the data.',
@@ -87,7 +93,6 @@ const manage = () => {
     const [wines, setWines] = useState<Wine[]>([])
     // VARIABLE TO DECLARE ONLY 20 SETS OF WINE FOR SHOW MORE BUTTON
     const displayWine = wines?.slice(0, perPage * current)
-    console.log(displayWine)
     useEffect(() => {
         const id = localStorage.getItem("data")
         if (!id) {
@@ -101,9 +106,7 @@ const manage = () => {
             try {
                 const res = await axios.get(`/api/wines?id=${id}`)
                 setWines(res.data.wine)
-                console.log(res.data.wine)
             } catch (error) {
-                console.log(error)
             }
 
         }
@@ -111,12 +114,6 @@ const manage = () => {
         handleCall()
     }, [])
 
-    useEffect(() => {
-        setTimeout(() => {
-            console.log(localStorage.getItem("data"))
-            console.log(wines)
-        }, 2000)
-    }, [wines])
 
     // MAIN TABLE WHERE ALL THE MAGIC HAPPENS (CRUD SYSTEM)
     return (

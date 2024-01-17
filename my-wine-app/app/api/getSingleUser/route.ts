@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 // FETCH A SINGLE USER ROUTE
 
 export const GET = async (req: NextApiRequest) => {
-  console.log(req);
   try {
     const iD = req.query.id as string;
 
@@ -30,7 +29,6 @@ export const GET = async (req: NextApiRequest) => {
       message: "User retrieved successfully",
     });
   } catch (e) {
-    console.log(e);
     return NextResponse.json({
       error: e || "Internal server error",
       message: "Something went wrong",
