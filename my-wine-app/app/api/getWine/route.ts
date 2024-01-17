@@ -1,11 +1,11 @@
 import { Wine } from "./../../../interfaces/interfaces";
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 // GET A SINGLE WINE'S DATA
 
-export const GET = async (req: NextApiRequest) => {
+export const GET = async (req: NextRequest) => {
   const url = req.url as string;
   const id = Number(url.substring(url.lastIndexOf("=") + 1));
   if (!id) {
