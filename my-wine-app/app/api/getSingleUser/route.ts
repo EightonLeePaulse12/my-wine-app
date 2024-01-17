@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import { NextApiRequest } from "next";
 import { NextResponse, NextRequest } from "next/server";
 
 // FETCH A SINGLE USER ROUTE
