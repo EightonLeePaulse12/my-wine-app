@@ -6,12 +6,24 @@ import { NextResponse } from "next/server";
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { id, name, year, type, varietal, rating } = body;
-
+    let { id, name, year, type, varietal, rating } = body;
+    year = Number(year)
+    rating = parseFloat(rating)
     if (!id && !name && !year && !type && !varietal && rating === null) {
       return NextResponse.json({
         message: "Not all entries were retrieved",
         status: 400,
+      });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!user) {
+      return NextResponse.json({
+        message: "User not found",
+        status: 404,
       });
     }
 
@@ -22,16 +34,15 @@ export const POST = async (req: Request) => {
         type,
         varietal,
         rating,
-        wineLogs:{
-          create:{
-            userId: parseInt(id, 10),
-            consumed: false
-          }
-        }
+        wineLogs: {
+          create: {
+            user: Number(id),
+            consumed: false,
+            user: { connect: { id: user.id } },
+          },
+        },
       },
     });
-
-    
 
     return NextResponse.json({
       message: "Successfully added the wine to the database",
@@ -47,4 +58,3 @@ export const POST = async (req: Request) => {
     });
   }
 };
-

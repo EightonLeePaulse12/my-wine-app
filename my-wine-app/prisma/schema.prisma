@@ -1,5 +1,3 @@
-// DATABASE TABLES SET UP WITH FOREIGN KEYS AND RELATIONSHIPS
-
 generator client {
   provider = "prisma-client-js"
 }
