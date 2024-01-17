@@ -25,7 +25,6 @@ export const POST = async (req: Request) => {
         email: email,
       },
     });
-    console.log("existing user: ", existingUser);
 
     // Sending a 404 NOT FOUND if the user does not exist
     if (!existingUser) {
@@ -62,7 +61,6 @@ export const POST = async (req: Request) => {
       }
     );
 
-    console.log(token);
     // Sending user's data for data management system as well as a message and of course, the token
     return NextResponse.json(
       {

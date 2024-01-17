@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 // REGISTER USER PAGe
 
@@ -15,6 +16,13 @@ const RegisterForm = () => {
 
     // API CALL FUNCTION TO HANDLE REGISTRATION
 
+    useEffect(()=>{
+        const token = Cookies.get("token")
+        if(token){
+          router.push('/')
+        }
+      }, [router])
+
     const handleReg = async () => {
         try {
             const res = await axios.post("/api/registerUser", {
@@ -22,7 +30,6 @@ const RegisterForm = () => {
                 email,
                 password
             })
-            console.log("DATA: ", res)
 
             if (res.data.message === "User created successfully") {
                 Swal.fire({
@@ -30,7 +37,7 @@ const RegisterForm = () => {
                     text: "You have successfully been registered, you can now log in.",
                     icon: "success"
                 })
-                // router.push("/pages/register.tsx")
+                router.push("/login")
                 return "User registered successfully";
             } else {
                 Swal.fire({
@@ -42,7 +49,6 @@ const RegisterForm = () => {
                 return "User registration failed";
             }
         } catch (e) {
-            console.log("Something went wrong: ", e)
 
             return "An error occurred while registering the user";
         }

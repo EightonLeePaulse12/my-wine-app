@@ -49,7 +49,6 @@ export const POST = async (req: Request) => {
       wine: createdWine,
     });
   } catch (e) {
-    console.log(e);
     return NextResponse.json({
       message: "An erorr occured",
       status: 500,

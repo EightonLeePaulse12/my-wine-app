@@ -41,7 +41,6 @@ export const PATCH = async (req: Request) => {
       wine: updWine,
     });
   } catch (e) {
-    console.log(e);
     return NextResponse.json({
       message: "An error occured",
       status: 500,
