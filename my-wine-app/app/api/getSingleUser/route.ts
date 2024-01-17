@@ -1,12 +1,15 @@
 import prisma from "@/lib/prisma";
 import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 // FETCH A SINGLE USER ROUTE
 
-export const GET = async (req: NextApiRequest) => {
+export const GET = async (req: NextRequest) => {
   try {
-    const iD = req.query.id as string;
+
+    const link = req.url
+    const iD = link.substring(link.lastIndexOf("=") + 1)
+    // const iD = req.url.query?.id as string;
 
     const idAsNumb = parseInt(iD, 10);
 
@@ -29,6 +32,7 @@ export const GET = async (req: NextApiRequest) => {
       message: "User retrieved successfully",
     });
   } catch (e) {
+    console.log(e);
     return NextResponse.json({
       error: e || "Internal server error",
       message: "Something went wrong",
