@@ -6,7 +6,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
-
+    /* GETTING LAST VALUES AFTER = SIGN IN URL */
     const link = req.url
     const iD = link.substring(link.lastIndexOf("=") + 1)
     // const iD = req.url.query?.id as string;
