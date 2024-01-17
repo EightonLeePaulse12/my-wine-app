@@ -42,7 +42,7 @@ const LoginForm = () => {
           path: "/"
         });
         localStorage.setItem("data", JSON.stringify(user.id, user.username, user.email))
-        Swal.fire({
+        await Swal.fire({
           title: "Logged in successfully",
           text: "You have logged in successfully!",
           icon: "success",

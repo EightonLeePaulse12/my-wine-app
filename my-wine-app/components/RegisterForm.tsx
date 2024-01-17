@@ -32,7 +32,7 @@ const RegisterForm = () => {
             })
 
             if (res.data.message === "User created successfully") {
-                Swal.fire({
+                await Swal.fire({
                     title: "Registered Successfully",
                     text: "You have successfully been registered, you can now log in.",
                     icon: "success"

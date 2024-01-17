@@ -34,14 +34,12 @@ const add = () => {
                 rating
             })
             if (add.data.message === "Successfully added the wine to the database") {
-                Swal.fire({
+                await Swal.fire({
                     title: "Added successfully",
                     text: "You have successfully added your wine",
                     icon: "success"
                 })
-                // setTimeout(() => {
-                //     router.push('/manage')
-                // }, 1000)
+                router.push('/manage')
             } else {
                 Swal.fire({
                     title: "Something went wrong",
@@ -63,27 +61,29 @@ const add = () => {
     return (
         <>
         <Navbar/>
-            <div>
-                <h1>Add Wine</h1>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="name">Name:</label>
+            <div className="max-w-2x1 mx-auto p-8">
+                <h1 className="text-3xl font-bold mb-8 text-center">Add Wine</h1>
+                <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+                    <label className="block text-sm font-medium text-black-600" htmlFor="name">Name:</label>
                     <input
+                    className="mt-1 p-2 border rounded border-black w-full"
                         type="text"
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <br />
-                    <label htmlFor="year">Year:</label>
+                    <label className="block text-sm font-medium text-black-600" htmlFor="year">Year:</label>
                     <input
+                    className="mt-1 p-2 border rounded border-black w-full"
                         type="number"
                         id="year"
                         value={year}
                         onChange={(e) => setYear(Number(e.target.value))}
                     />
                     <br />
-                    <label htmlFor="type">Type:</label>
-                    <select id="type" value={type} onChange={(e) => setType(e.target.value)}>
+                    <label className="block text-sm font-medium text-black-600" htmlFor="type">Type:</label>
+                    <select id="type" className="border-black mt-1 p-2 border rounded w-full" value={type} onChange={(e) => setType(e.target.value)}>
                         <option value="RED">RED</option>
                         <option value="WHITE">WHITE</option>
                         <option value="ROSE">ROSE</option>
@@ -91,11 +91,12 @@ const add = () => {
                         <option value="RED_BLEND">RED_BLEND</option>
                     </select>
                     <br />
-                    <label htmlFor="varietal">Varietal:</label>
+                    <label className="block text-sm font-medium text-black-600" htmlFor="varietal">Varietal:</label>
                     <select
                         id="varietal"
                         value={varietal}
                         onChange={(e) => setVarietal(e.target.value)}
+                        className="border-black mt-1 p-2 border rounded w-full"
                     >
                         <option value="CabernetSauvignon">Cabernet Sauvignon</option>
                         <option value="Merlot">Merlot</option>
@@ -122,15 +123,16 @@ const add = () => {
                         <option value="Malbec">Malbec</option>
                     </select>
                     <br />
-                    <label htmlFor="rating">Rating:</label>
+                    <label className="block text-sm font-medium text-black-600" htmlFor="rating">Rating:</label>
                     <input
+                    className="mt-1 p-2 border rounded border-black w-full"
                         type="number"
                         id="rating"
                         value={rating | 0}
                         onChange={(e) => setRating(Number(e.target.value))}
                     />
                     <br />
-                    <button type="button" onClick={handleSubmit}>Add Wine</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" onClick={handleSubmit}>Add Wine</button>
                 </form>
             </div>
             <Footer/>

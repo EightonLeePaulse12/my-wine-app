@@ -74,7 +74,7 @@ const UpdateWine: React.FC<UpdateWineProps> = ({ wineId }) => {
             });
 
             if (update.data.message === "Successfully updated wine") {
-                Swal.fire({
+                await Swal.fire({
                     title: "Updated successfully",
                     text: "You have successfully updated your wine",
                     icon: "success",

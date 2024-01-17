@@ -61,7 +61,7 @@ const manage = () => {
                 const resp = await axios.delete(`/api/deleteWine`, {
                     data: { id: wineId }
                 })
-                Swal.fire({
+                await Swal.fire({
                     title: 'Deleted!',
                     text: 'Your data has been deleted.',
                     icon: 'success',
