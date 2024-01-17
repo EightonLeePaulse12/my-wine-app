@@ -59,8 +59,8 @@ const LoginForm = () => {
 
       { /* PAGE DESIGN AND BINDING INPUTS TO STATES SO THAT IT CAN BE SENT BACK AS VALUES TO THE API */ }
 
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="bg-white p-8 rounded border-t-black shadow-md w-full sm:w-96">
           <h1 className="text-2xl font-semibold mb-6">Login</h1>
           <input
             type="text"

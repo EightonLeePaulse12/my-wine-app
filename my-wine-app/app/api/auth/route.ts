@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
-// API route for logging the user in
+// API ROUTE FOR LOGGING THE USER IN
 
 export const POST = async (req: Request) => {
   try {
@@ -19,7 +19,7 @@ export const POST = async (req: Request) => {
         status:400
       })
     }
-    // Finding out to see if the user is in the database
+    // CHECKING TO SEE IF THE USER IS IN THE DATABASE
     const existingUser = await prisma.user.findUnique({
       where: {
         email: email,

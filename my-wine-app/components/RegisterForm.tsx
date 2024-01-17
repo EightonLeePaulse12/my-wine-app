@@ -52,7 +52,7 @@ const RegisterForm = () => {
 
             { /* SAME THING WITH LOGGING, BINDING INPUTS TO STATE VALUES TO SEND BACK TO THE DATABASE */ }
 
-            <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="flex items-center justify-center min-h-screen ">
                 <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
                     <h1 className="text-2xl font-semibold mb-6">Register</h1>
                     <input
