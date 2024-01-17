@@ -19,7 +19,7 @@ export const DELETE = async (req: Request) => {
         id: parseInt(id, 10),
       },
     });
-
+    console.log(id)
     if (!delWine) {
       return NextResponse.json({
         message: "Wine not found",
