@@ -66,8 +66,9 @@ const manage = () => {
                     text: 'Your data has been deleted.',
                     icon: 'success',
                 });
+                console.log(resp)
 
-                setWines((prevWine) => prevWine.filter((wine) => wine.id !== wineId))
+                location.reload()
             } catch (error) {
                 Swal.fire({
                     title: 'Error!',

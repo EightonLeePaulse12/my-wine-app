@@ -31,6 +31,7 @@ export const DELETE = async (req: Request) => {
       message: "Successfully deleted the wine",
       status: 200,
       wine: delWine,
+      id
     });
   } catch (e) {
     return NextResponse.json({
