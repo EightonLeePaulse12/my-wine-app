@@ -1,6 +1,6 @@
 # My Wines App
 
-Brief description of your Next.js project.
+Brief description of my Next.js project.
 
 ## Table of Contents
 
