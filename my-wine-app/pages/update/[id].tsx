@@ -35,8 +35,8 @@ const UpdateWine: React.FC<UpdateWineProps> = ({ wineId }) => {
     useEffect(() => {
         const fetchWineDetails = async () => {
             try {
+                const res = await axios.get(`/api/getWine?id=${id}`);
                 if (id) {
-                    const res = await axios.get(`/api/getWine?id=${id}`);
                     const wineDetails = res.data.wine;
                     setName(wineDetails.name);
                     setYear(wineDetails.year);
@@ -48,7 +48,7 @@ const UpdateWine: React.FC<UpdateWineProps> = ({ wineId }) => {
                 }
             } catch (error) {
                 console.error("Error fetching wine details:", error);
-                router.push("/manage");
+                alert("Something went wrong")
             }
         };
 
