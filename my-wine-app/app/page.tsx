@@ -8,7 +8,8 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar';
 
 const page = () => {
-
+  console.log("Hello, world!")
+  
   const router = useRouter()
   useEffect(() => {
 

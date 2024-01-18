@@ -31,6 +31,7 @@ const LoginForm = () => {
         email,
         password
       });
+      console.log(res)
 
       // ADDING CONDITIONALS TO MAKE SURE THE USER LOGS IN PROPERLY
       if (res.data && res.data.token) {
